@@ -11,18 +11,19 @@
   <title>Chara-verse</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/shop-item.css" rel="stylesheet">
-  <link href="css/monCssAmoi.css" rel="stylesheet">
-  <script src="JS/monJsTropBienDelaMort.js"></script>
+  <link href="../css/shop-item.css" rel="stylesheet">
+  <link href="../css/monCssAmoi.css" rel="stylesheet">
+  <script src="../JS/monJsTropBienDelaMort.js"></script>
 </head>
 
 <body class="bodyClass">
 
-  <div class="megaBody">
-
+  <app-root>
+    <div class="megaBody">
+    
       <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
@@ -32,21 +33,21 @@
           </button>
         </div>
       </nav>
-
+    
       <!-- Page Content -->
       <div class="container">
-
+    
         <div class="row">
-
+    
           <div class="text_recherche">
             <p >Veuillez entrer un élément à rechercher</p>
             <div class="list-group">
             </div>
           </div>
-
+    
           <div class="zone_recherche">
             <select size='1' onmousedown='if (this.options.length > 8){this.size = 8}' onchange='this.size = 0' onblur="this.size = 1" class='form-control' id='filterText'>
-
+    
               <option selected>Choisissez un univers</option>
               <option>Pokemon</option>
               <option>Star Wars</option>
@@ -57,11 +58,11 @@
             <button id='button' onclick="getDonnees()">Search</button>
           </div>
           <!-- /.col-lg-3 -->
-
+    
           
-
+    
             <div class="col-lg-9">
-
+    
               <div class="card mt-4">
                 <div class="card-body">
                   <h3 class="card-title" id='Nom-Entite'>Personne</h3>
@@ -71,28 +72,30 @@
               </div>
             </div>
           </script>
-
+    
           </div>
           <!-- /.col-lg-9 -->
-
+    
         </div>
-
+    
       </div>
       <!-- /.container -->
     </div>
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
+    
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Chara-verse 2021</p>
     </div>
     <!-- /.container -->
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    </footer>
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    
+  </app-root>
 </body>
 
 </html>

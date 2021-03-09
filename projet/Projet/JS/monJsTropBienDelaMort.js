@@ -24,15 +24,9 @@ function getDonnees(){
 
         request.onload = function(){
             var data = JSON.parse(this.response)
-            
-            if(Object.keys(data).length === 0){
-                document.getElementById("Nom-Entite").innerHTML = "Ce pokemon n'existe pas !"
-            }
-            else{
-                console.log(data.name)
+            console.log(data.name)
 
-                document.getElementById("Nom-Entite").innerHTML = data.names[4].name;
-            }
+            document.getElementById("Nom-Entite").innerHTML = data.names[4].name;
         }
         request.send()
     }

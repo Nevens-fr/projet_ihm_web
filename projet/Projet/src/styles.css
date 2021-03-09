@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+/*
+ * Classe pour l'ensemble du body de la page
+*/
+.bodyClass{
+    background-color: rgb(75, 75, 75);
+    color :rgb(226, 21, 21);
+}
+
+/*
+ * Classe pour l'ensemble du body sauf le footer
+*/
+.megaBody{
+    background-color: rgb(75, 75, 75);
+    color :#e21515;
+    margin-left: 15%;
+}
+
+/*
+ * Classe pour la zone de recherche
+*/
+.zone_recherche{
+    color : red;
+    margin-left: 28%;
+}
+
+/*
+ * Classe pour le texte au dessus de la zone de recherche
+*/
+.text_recherche{
+    color :white;
+    font-size: 50px;
+    margin-top: 3%;
+    text-align: justify;
+    width: 80%;
+}
+
+.form-control{
+    margin-top: 3%;
+}

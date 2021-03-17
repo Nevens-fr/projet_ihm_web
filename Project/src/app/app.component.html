@@ -1,14 +1,14 @@
 	<div class="megaBody">
 		<!-- Navigation -->
-		<nav class="tete">
+		<nav class="header">
 			<div class="container">
-				<a class="tetetete" href="#">Chara-verse - Le seul et unique site rassemblant différents univers de science-fiction</a> <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarResponsive" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+				<a class="header-text" href="#">Chara-verse</a> <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarResponsive" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 			</div>
 		</nav><!-- Page Content -->
 		<div class="container">
 			<div class="row">
-				<div class="text_recherche">
-					<p>Veuillez entrer un élément à rechercher</p>
+				<div>
+					<p class="text_recherche">Veuillez entrer un élément à rechercher</p>
 					<div class="list-group"></div>
 				</div>
 				<div class="zone_recherche">
@@ -28,13 +28,12 @@
 						<option>
 							Seigneur des Anneaux
 						</option>
-					</select> <input aria-label="Search through site content" id="site-search" name="q" type="rechercher"> <button id='button' onclick="getDonnees()">Search</button>
+					</select> <input aria-label="Search through site content" id="site-search" name="q" type="rechercher" class="search">  <button id='button' onclick="getDonnees()" class ="sear-butt">Search</button>
 				</div><!-- /.col-lg-3 -->
 				<div class="col-lg-9">
 					<div class="card mt-4">
-						<app-pokemon></app-pokemon>
-				</div><!--</script>-->
-				<!--</div>-->
+						<app-star-wars></app-star-wars>
+				</div>
 				<!-- /.col-lg-9 -->
 			</div>
 		</div><!-- /.container -->

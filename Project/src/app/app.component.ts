@@ -10,17 +10,30 @@ export class AppComponent implements OnInit{
   ngOnInit(){
   }
 
+  loadComponent(){
+    var champChoix = document.getElementById("filterText")!;
+    var selected = (champChoix as HTMLSelectElement).selectedIndex;
+
+    if(selected == 1){
+      document.getElementById("composant")!.style.display = "block";
+      document.getElementById("composant2")!.style.display = "none";
+    }
+    else if(selected == 2){
+      document.getElementById("composant")!.style.display = "none";
+      document.getElementById("composant2")!.style.display = "block";
+    }
+  }
+
   getDonnees(){
+
+    this.loadComponent()
     var poke = new PokemonComponent();
     var p = (document.getElementById("site-search") as HTMLTextAreaElement).value;
-    console.log(p);
 
     p = p.toLowerCase();
 
     var champChoix = document.getElementById("filterText")!
     var selected = (champChoix as HTMLSelectElement).selectedIndex;
-
-    console.log(selected);
 
     if(selected == 1){
         var request = new XMLHttpRequest()
@@ -31,7 +44,6 @@ export class AppComponent implements OnInit{
 
         request.onload = function(){
             var data = JSON.parse(this.response)
-            console.log(data.name)
             document.getElementById("pokemon-nom")!.innerHTML = "Nom : "  + data.name.charAt(0).toUpperCase() + data.name.slice(1);
             document.getElementById("pokemon-id")!.innerHTML = "ID : "  + data.id;
             try{

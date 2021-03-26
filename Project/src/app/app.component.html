@@ -1,18 +1,25 @@
+<script src="../vendor/jquery/jquery.min.js"></script> 
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--<script type="text/javascript" src="../../hellonode.js"></script>-->
+
+
 	<div class="megaBody">
 		<!-- Navigation -->
 		<nav class="header">
 			<div class="container">
-				<a class="header-text" href="#">Chara-verse</a> <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarResponsive" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+				<!--<a class="header-text" href="#">Chara-verse</a> <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarResponsive" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>-->
+				<!--<p id='logo'></p>-->
+				<img id='logo' src="ok.png" alt="Chara-Verse">
 			</div>
 		</nav><!-- Page Content -->
 		<div class="container">
 			<div class="row">
 				<div>
 					<p class="text_recherche">Veuillez entrer un élément à rechercher</p>
-					<div class="list-group"></div>
+					<div class="list-group"></div> 
 				</div>
 				<div class="zone_recherche">
-					<select class='form-control' id='filterText' onblur="this.size = 1" onchange='this.size = 0' onmousedown='if (this.options.length &gt) 8;{this.size = 8}' size='1'>
+					<select class='form-control' id='filterText' onblur="this.size = 1" onchange='this.size = 0' onmousedown='if (this.options.length) 8;{this.size = 8}' size='1'>
 						<option selected>
 							Choisissez un univers
 						</option>
@@ -25,14 +32,12 @@
 						<option>
 							Marvel
 						</option>
-						<option>
-							Seigneur des Anneaux
-						</option>
-					</select> <input aria-label="Search through site content" id="site-search" name="q" type="rechercher" class="search">  <button id='button' onclick="getDonnees()" class ="sear-butt">Search</button>
+					</select> <input aria-label="Search through site content" id="site-search" name="q" type="rechercher" class="search">  <button id='button' (click)="getDonnees()" class ="sear-butt">Search</button>
 				</div><!-- /.col-lg-3 -->
 				<div class="col-lg-9">
 					<div class="card mt-4">
-						<app-star-wars></app-star-wars>
+						<app-pokemon></app-pokemon>
+
 				</div>
 				<!-- /.col-lg-9 -->
 			</div>
@@ -44,8 +49,3 @@
 			<!-- /.container -->
 		</div>
 	</footer><!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js">
-	</script> 
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js">
-	</script>
-  <script src="../../JS/monJsTropBienDelaMort.js"></script>

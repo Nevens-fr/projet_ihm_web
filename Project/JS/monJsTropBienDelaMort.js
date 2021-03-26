@@ -1,12 +1,8 @@
-function recherche(){
-    var p = document.getElementById("button");
-    p.onclick = getDonnees();
-}
-
 /*
 Fonction permettant d'envoyer des données
 */
 function getDonnees(){
+    console.log("OUI");
     var p = document.getElementById("site-search").value;
     console.log(p);
 
@@ -46,3 +42,10 @@ function getDonnees(){
         request.send()
     }
 }
+
+function recherche(){
+    var p = document.getElementById("button");
+    p.onclick = getDonnees();
+}
+
+module.exports= {getDonnees};

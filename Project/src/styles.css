@@ -37,6 +37,14 @@ body {
 html{
     font-size: 100%;
 }
+
+img#logo{
+  /*background-image: url(./app/ok.png);*/
+  width: 60%;
+  height: 40%;
+  /*padding: 0;
+  background-repeat: no-repeat;*/
+}
   
 /*
  * Classe pour l'ensemble du body de la page

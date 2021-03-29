@@ -60,16 +60,32 @@ export class AppComponent implements OnInit{
     }
     else if(selected == 2){
         var request = new XMLHttpRequest()
-        var baseRequest = "https://swapi.co/api/people/?search="
+        var baseRequest = "https://swapi.dev/api/people/"
         baseRequest = baseRequest.concat('', p) 
 
         request.open("GET", baseRequest , true)
 
         request.onload = function(){
             var data = JSON.parse(this.response)
-            console.log(data.results)
 
-            document.getElementById("Nom-Entite")!.innerHTML = data.results.name;
+            document.getElementById("sw-nom")!.innerHTML = "Nom : "  + data.name;
+            document.getElementById("sw-sexe")!.innerHTML = "Sexe : "  + data.gender;
+            document.getElementById("sw-planete")!.innerHTML = "Planète : "  + data.homeworld;
+            document.getElementById("sw-film")!.innerHTML = "Films : ";
+            for (const film in data.films){
+              console.log(data.films[film])
+              var request = new XMLHttpRequest()
+
+              request.open("GET", data.films[film] , true)
+
+              request.onload = function(){
+                var data = JSON.parse(this.response)
+                document.getElementById("sw-film")!.innerHTML = document.getElementById("sw-film")!.innerHTML  + data.name;
+              }
+            }
+            
+            document.getElementById("sw-espece")!.innerHTML = "Espèce : "  + data.species[0];
+            document.getElementById("sw-vaisseau")!.innerHTML = "films : "  + data.starships[0];
         }
         request.send()
     }

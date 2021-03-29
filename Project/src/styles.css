@@ -1,5 +1,24 @@
 
 
+@media all and (min-width: 801px) and (max-width: 1000px) {
+
+  .zone_recherche{
+    color : red;
+    margin-left: 30%;
+  }
+
+  .header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20%;
+    background-color: #212529;
+    text-align: center;
+    font-size: 200%;
+  }
+}
+
 @media all and (min-width: 451px) and (max-width: 800px) {
     .bodyClass{
         font-size: 2rem;
@@ -19,9 +38,15 @@
         font-size: 0.1rem;
         color: white;
     }
+
+    img#logo{
+      width: 60%;
+      height: 100%;
+    }
+    
 }
 
-@media all and (max-width: 320px){
+@media screen and (max-width: 320px;){
     .bodyClass{
         font-size: 1rem;
         
@@ -29,6 +54,16 @@
     .text_recherche{
         font-size: 1rem;
     }
+
+    img#logo{
+      width: 120%;
+      height: 120%;
+    }
+
+    .zone_recherche{
+      color : red;
+      margin-left: 10%;
+  }
 }
 
 body {
@@ -39,11 +74,8 @@ html{
 }
 
 img#logo{
-  /*background-image: url(./app/ok.png);*/
   width: 60%;
   height: 40%;
-  /*padding: 0;
-  background-repeat: no-repeat;*/
 }
   
 /*
@@ -100,7 +132,7 @@ img#logo{
 */
 .zone_recherche{
     color : red;
-    margin-left: 26%;
+    margin-left: 32%;
 }
 
 .search{

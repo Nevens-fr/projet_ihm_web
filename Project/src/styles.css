@@ -1,70 +1,7 @@
 
 
-@media all and (min-width: 801px) and (max-width: 1000px) {
 
-  .zone_recherche{
-    color : red;
-    margin-left: 30%;
-  }
 
-  .header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 20%;
-    background-color: #212529;
-    text-align: center;
-    font-size: 200%;
-  }
-}
-
-@media all and (min-width: 451px) and (max-width: 800px) {
-    .bodyClass{
-        font-size: 2rem;
-        
-    }
-    .text_recherche{
-        font-size: 1rem;
-    }
-}
-
-@media all and (min-width: 321px) and (max-width: 450px) {
-    .bodyClass{
-        font-size: 1.5rem;
-        
-    }
-    .text_recherche{
-        font-size: 0.1rem;
-        color: white;
-    }
-
-    img#logo{
-      width: 60%;
-      height: 100%;
-    }
-    
-}
-
-@media screen and (max-width: 320px;){
-    .bodyClass{
-        font-size: 1rem;
-        
-    }
-    .text_recherche{
-        font-size: 1rem;
-    }
-
-    img#logo{
-      width: 120%;
-      height: 120%;
-    }
-
-    .zone_recherche{
-      color : red;
-      margin-left: 10%;
-  }
-}
 
 body {
     padding-top: 56px;
@@ -73,10 +10,6 @@ html{
     font-size: 100%;
 }
 
-img#logo{
-  width: 60%;
-  height: 40%;
-}
   
 /*
  * Classe pour l'ensemble du body de la page
@@ -84,17 +17,6 @@ img#logo{
 .bodyClass{
     background-color: rgb(75, 75, 75);
     color :rgb(226, 21, 21);
-}
-
-.header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 7%;
-    background-color: #212529;
-    text-align: center;
-    font-size: 200%;
 }
 
 .header-text{
@@ -108,15 +30,7 @@ img#logo{
     text-decoration: none;
 }
 
-.pied{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 5%;
-    background-color: #212529;
-    text-align: center;
-}
+
 
 /*
  * Classe pour l'ensemble du body sauf le footer
@@ -124,16 +38,11 @@ img#logo{
 .megaBody{
     background-color: rgb(75, 75, 75);
     color :#e21515;
-    margin-left: 17%;
 }
 
 /*
  * Classe pour la zone de recherche
 */
-.zone_recherche{
-    color : red;
-    margin-left: 32%;
-}
 
 .search{
     background-color: grey;
@@ -149,14 +58,7 @@ img#logo{
 /*
  * Classe pour le texte au dessus de la zone de recherche
 */
-.text_recherche{
-    color :white;
-    margin-top: 3%;
-    text-align: center;
-    font-size: 35px;
-    margin-left: 18%;
-    width: max-content;
-}
+
 
 .form-control{
     margin-top: 3%;

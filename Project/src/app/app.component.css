@@ -1,0 +1,53 @@
+.logo{
+    width: 50%;
+    height: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 7.5%;
+    background-color: #212529;
+    text-align: center;
+    font-size: 200%;
+}
+
+.text_recherche{
+    color :white;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    font-size: 35px;
+}
+
+.row{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    left: 0;
+    right: 0;
+}
+
+.pied{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5%;
+    background-color: #212529;
+    text-align: center;
+}
+
+.cards{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: auto;
+    padding-right: auto;
+}
+

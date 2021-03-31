@@ -1,3 +1,33 @@
-h1#pokemon-texte{
+#logo-pokemon{
+    width: 10%;
+    height: 20%;
+    float: left;
+}
+
+#pokemon-nom{
+    position: absolute;
     text-align: center;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    font-size: 50px;
+}
+
+.pokemon-first{
+    overflow: auto;
+}
+
+.pokemon-droite{
+    text-align:justify;
+    display:inline-block;
+}
+
+#pokemon-image{
+    width: 200%;
+    height: 200%;
+}
+
+.pokemon-gauche{
+    text-align:justify;
+    display:inline-block;
 }

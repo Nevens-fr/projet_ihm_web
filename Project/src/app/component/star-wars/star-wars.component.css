@@ -1,3 +1,50 @@
-h1#sw-texte{
+#logo-sw{
+    width: 10%;
+    height: 20%;
+    float: left;
+    margin-left: 4%;
+    margin-top: 1%;
+}
+
+#sw-nom{
+    position: absolute;
     text-align: center;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    font-size: 50px;
+    color: #212529;
+    font-family: 'comicfont';
+}
+
+.sw-first{
+    overflow: auto;
+}
+
+.sw-gauche{
+    text-align:left;
+    display: inline-block;
+    margin-top: 4%;
+    margin-left: 4%;
+    color: #212529;
+}
+
+.sw-droite{
+    text-align:right;
+    display: inline-block;
+    margin-top: 4%;
+    margin-right: 4%;
+    color: #212529;
+    float: right;
+}
+
+.sw-bas{
+    text-align:center;
+    display: inline-block;
+    color: #212529;
+    margin-top: 4%;
+    left: 0;
+    right: 0;
+    position: absolute;
+
 }

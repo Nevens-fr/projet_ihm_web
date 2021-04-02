@@ -1,5 +1,8 @@
 
-
+@font-face {
+  font-family: comicfont;
+  src: url(assets/font/ComicFontBold.ttf) format("opentype");
+}
 
 
 

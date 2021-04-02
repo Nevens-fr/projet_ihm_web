@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PokemonComponent} from "./component/pokemon/pokemon.component";
 import MD5 from "crypto-js/md5";
 import * as $ from "jquery";
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -36,21 +37,24 @@ export class AppComponent implements OnInit{
   /*
   Recherche pour les films
   */
-  async requete(data, texte, id, url){
+  requete(texte, id, url, request){
     var result = texte;
-    await setTimeout(() => {   }, 4000);
-    var request1 = new XMLHttpRequest()
 
-      request1.open("GET", url , true)
-      console.log(request1)
+    request = new XMLHttpRequest()
 
-      request1.onload = function(){
-        console.log("0.5")
+      request.open("GET", url , true)
+      request.send()
+
+      request.onload = function(){
         var data2 = JSON.parse(this.response)
+        
+        if(id === "sw-planete" || "sw-vaisseau" == id || id === "sw-espece")
+          result = result.concat(' ', data2.name)
+        else if (id === "sw-film")
+          result = result.concat(' ', data2.title)
 
-        result = result.concat(' ', data2.homeworld)
+        document.getElementById(id)!.innerHTML = result.toString()
     }
-    document.getElementById(id)!.innerHTML = result.toString()
   }
 
   /*
@@ -59,7 +63,7 @@ export class AppComponent implements OnInit{
   getDonnees(){
 
     this.loadComponent()
-    var poke = new PokemonComponent();
+
     var p = (document.getElementById("site-search") as HTMLTextAreaElement).value;
 
     p = p.toLowerCase();
@@ -98,38 +102,47 @@ export class AppComponent implements OnInit{
         var funfun = this.requete
 
         request.open("GET", baseRequest , true)
-        console.log(request)
 
         request.onload = function(){
             var data = JSON.parse(this.response)
 
-            document.getElementById("sw-nom")!.innerHTML = "Nom : "  + data.name;
-            document.getElementById("sw-sexe")!.innerHTML = "Sexe : "  + data.gender;
+            document.getElementById("sw-nom")!.innerHTML = data.name;
+            document.getElementById("sw-sexe")!.innerHTML = "Sexe : "  + data.gender.charAt(0).toUpperCase() + data.gender.slice(1);
             document.getElementById("sw-planete")!.innerHTML = "Planète : "  + data.homeworld;
             
-            funfun(data, "Film :", "sw-film", data.films)
-            funfun(data, "Planète :", "sw-planete", data.homeworld)
-            
-            document.getElementById("sw-espece")!.innerHTML = "Espèce : "  + data.species[0];
-            document.getElementById("sw-vaisseau")!.innerHTML = "Vaisseau : "  + data.starships[0];
+            funfun("Première apparition :<br>", "sw-film", data.films[0].replace('http', 'https'), request)
+            funfun("Planète :", "sw-planete", data.homeworld, request)
+            funfun("Vaisseau :", "sw-vaisseau", data.starships[0], request)
+            if(data.species.length == 0)
+              document.getElementById("sw-espece")!.innerHTML = "Espèce : Human";
+            else
+            funfun("Espèce :", "sw-espece", data.species[0], request)
         }
         request.send()
     }
     else if(selected ==3){
-      $(function(){
-        var marvelAPI = 'https://gateway.marvel.com/v1/public/characters';
-        $.getJSON( marvelAPI, {
-            apikey:'e902f113dfa39dc0c4bd33abd53c3ec9'
+        var ts = new Date().getTime();
+        var hash = MD5(ts+'9ac7d74cb3352c72413580e0f9e479a2146684cb'+'10b22b8b4415964669f4c2765f3a78c2').toString();
+        var url = 'http://gateway.marvel.com/v1/public/characters'
+  
+        $.getJSON(url, {
+          apikey: '10b22b8b4415964669f4c2765f3a78c2',
+          ts: ts,
+          hash: hash,
+          name: p
           })
-            .done(function( p ) {
-              var results = p.data.results;
-              document.getElementById("marvel-nom")!.innerHTML = "Nom : "  + results.name;
-              document.getElementById("marvel-description")!.innerHTML = "Description : "  + results.description;
-              document.getElementById("marvel-stories")!.innerHTML = "Films : "  + results.stories;
-              document.getElementById("marvel-series")!.innerHTML = "Série : "  + results.series;
+          .done(function(data) {
+            var results = data.data.results;
+              document.getElementById("marvel-nom")!.innerHTML = results[0].name;
+              document.getElementById("marvel-description")!.innerHTML = results[0].description;
+              document.getElementById("marvel-stories")!.innerHTML = "Films : "  + results[0].stories[0];
+              document.getElementById("marvel-series")!.innerHTML = "Série : "  + results[0].series[0];
+              document.getElementById("marvel-image")!.innerHTML = "<img src="  + results[0].thumbnail+" style=\"width:200%;height:200%\">";
+          })
+          .fail(function(err){
+            // the error codes are listed on the dev site
+            console.log(err);
           });
-           
-        });
     }
   }
 }

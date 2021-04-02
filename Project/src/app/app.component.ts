@@ -135,9 +135,11 @@ export class AppComponent implements OnInit{
             var results = data.data.results;
               document.getElementById("marvel-nom")!.innerHTML = results[0].name;
               document.getElementById("marvel-description")!.innerHTML = results[0].description;
-              document.getElementById("marvel-stories")!.innerHTML = "Films : "  + results[0].stories[0];
+              document.getElementById("marvel-stories")!.innerHTML = "Films : "  + results[0].stories;
               document.getElementById("marvel-series")!.innerHTML = "Série : "  + results[0].series[0];
-              document.getElementById("marvel-image")!.innerHTML = "<img src="  + results[0].thumbnail+" style=\"width:200%;height:200%\">";
+              document.getElementById("marvel-image")!.innerHTML = "<img src="  + results[0].thumbnail.path+'/landscape_medium.jpg ' + "style=\"width:200%;height:200%\">";
+              console.log(results[0].stories[1]);
+              
           })
           .fail(function(err){
             // the error codes are listed on the dev site

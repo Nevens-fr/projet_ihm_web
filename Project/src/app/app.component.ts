@@ -10,14 +10,23 @@ import { data } from 'jquery';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+
+  tab : any
   ngOnInit(){
   }
 
+  
+
   loadComponent(){
+ 
     var champChoix = document.getElementById("filterText")!;
     var selected = (champChoix as HTMLSelectElement).selectedIndex;
 
-    if(selected == 1){
+    if((document.getElementById("site-search") as HTMLTextAreaElement).value == ""){
+      javascript:alert('Veuillez indiquer un personnage !');
+    }
+
+    else if(selected == 1){
       document.getElementById("composant")!.style.display = "block";
       document.getElementById("composant2")!.style.display = "none";
       document.getElementById("composant3")!.style.display = "none";
@@ -32,6 +41,44 @@ export class AppComponent implements OnInit{
       document.getElementById("composant2")!.style.display = "none";
       document.getElementById("composant3")!.style.display = "block";
     }
+  
+  }
+
+  /*
+  * récupère tous les personnages de l'api swapi
+  */
+  getSW(){
+    var request = new XMLHttpRequest()
+    var baseRequest = "https://swapi.dev/api/people/"
+    request.open("GET", baseRequest , true)
+
+    var tab2 = new Array()
+
+    request.send()
+
+    request.onload = function(){
+      var data2 = JSON.parse(this.response)
+      for(var i = 0; i < data2.results.length;i++){
+        var tmp = data2.results[i].name.toLowerCase()
+        tab2.push(tmp)
+      }
+    }
+    this.tab = tab2
+    var i = 0
+    console.log(this.tab)
+    return new Promise(resolve => console.log())
+  }
+  
+  /*
+   * Cherche un élément dans le tableau
+  */
+  myIndexOf(elem){
+    for(var i = 0; i < 10; i++){
+      if(this.tab[i].toString().localeCompare(elem) == 0){
+        return i +1
+      }
+    }
+    return -1
   }
 
   /*
@@ -60,7 +107,7 @@ export class AppComponent implements OnInit{
   /*
     Récupération des données pour affichage
   */
-  getDonnees(){
+  async getDonnees(){
 
     this.loadComponent()
 
@@ -68,10 +115,16 @@ export class AppComponent implements OnInit{
 
     p = p.toLowerCase();
 
-    var champChoix = document.getElementById("filterText")!
+
+    var champChoix = document.getElementById("filterText")!;
     var selected = (champChoix as HTMLSelectElement).selectedIndex;
+  
+    if(selected == 0){
+      javascript:alert('Veuillez selectionner un univers !');
+    }
 
     if(selected == 1){
+
         var request = new XMLHttpRequest()
         var baseRequest = "https://pokeapi.co/api/v2/pokemon/"
         baseRequest = baseRequest.concat('', p) 
@@ -95,9 +148,11 @@ export class AppComponent implements OnInit{
         request.send()
     }
     else if(selected == 2){
+        await this.getSW()
+        var index = this.myIndexOf(p)
         var request = new XMLHttpRequest()
         var baseRequest = "https://swapi.dev/api/people/"
-        baseRequest = baseRequest.concat('', p) 
+        baseRequest = baseRequest.concat('', index.toString().concat('', '/')) 
 
         var funfun = this.requete
 
@@ -135,10 +190,13 @@ export class AppComponent implements OnInit{
             var results = data.data.results;
               document.getElementById("marvel-nom")!.innerHTML = results[0].name;
               document.getElementById("marvel-description")!.innerHTML = results[0].description;
-              document.getElementById("marvel-stories")!.innerHTML = "Films : "  + results[0].stories;
-              document.getElementById("marvel-series")!.innerHTML = "Série : "  + results[0].series[0];
+              document.getElementById("marvel-stories")!.innerHTML = "Films : "  + results[0].events.items[results[0].events.returned];
+              document.getElementById("marvel-series")!.innerHTML = "Série : "  + results[0].series.items[results[0].series.returned];
               document.getElementById("marvel-image")!.innerHTML = "<img src="  + results[0].thumbnail.path+'/landscape_medium.jpg ' + "style=\"width:200%;height:200%\">";
-              console.log(results[0].stories[1]);
+              
+              if( document.getElementById("marvel-description")!.innerHTML == ""){
+                document.getElementById("marvel-description")!.innerHTML = "There is no description for this character. Perhaps you could do it yourself so the database of marvel could be more complete. But on our side, we cannot do anything because we are only simple students.";
+              }
               
           })
           .fail(function(err){
@@ -146,5 +204,7 @@ export class AppComponent implements OnInit{
             console.log(err);
           });
     }
+    (document.getElementById("site-search") as HTMLTextAreaElement).value = "";
+
   }
 }

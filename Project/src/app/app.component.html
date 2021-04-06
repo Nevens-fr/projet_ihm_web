@@ -15,14 +15,14 @@
 		<div class="container">
 
 			<div>
-				<p class="text_recherche">Veuillez entrer un élément à rechercher</p>
+				<p class="text_recherche" id="text_recherche">Veuillez entrer un élément à rechercher</p>
 				<div class="list-group"></div> 
 			</div>
 
 			<div class="row">
 				
 				<div class="zone_recherche">
-					<select class='form-control' id='filterText' onblur="this.size = 1" onchange='this.size = 0' onmousedown='if (this.options.length) 8;{this.size = 8}' size='1'>
+					<select class='form-control' id='filterText' onblur="this.size = 1" onchange='this.size = 0' onmousedown='if (this.options.length) 4;{this.size = 4}' size='1'>
 						<option selected>
 							Choisissez un univers
 						</option>
@@ -35,7 +35,12 @@
 						<option>
 							Marvel
 						</option>
-					</select> <input aria-label="Search through site content" id="site-search" name="q" type="rechercher" class="search">  <button id='button' (click)="getDonnees()" class ="sear-butt">Search</button>
+					</select> <input aria-label="Search through site content" id="site-search" name="q" type="rechercher" class="search" onkeypress = "if (event.keyCode == 13)
+					document.getElementById('button').click()" autofocus="autofocus">  <button id='button' (click)="getDonnees()" class ="sear-butt">Search</button>
+				
+
+				
+				
 				</div><!-- /.col-lg-3 -->
 
 				<!-- /.col-lg-9 -->

@@ -17,13 +17,17 @@ export class AppComponent implements OnInit{
 
   
 
+  /*
+   * Methode permettant de faire apparaitre le bon bloc d'information en fonction de l'univers recherché
+   */
   loadComponent(){
  
     var champChoix = document.getElementById("filterText")!;
     var selected = (champChoix as HTMLSelectElement).selectedIndex;
 
+    //Affichage d'une erreur si le champs de recherche de personnage est vide
     if((document.getElementById("site-search") as HTMLTextAreaElement).value == ""){
-      javascript:alert('Veuillez indiquer un personnage !');
+      javascript:alert('Please enter a character\'s name !');
     }
 
     else if(selected == 1){
@@ -44,46 +48,10 @@ export class AppComponent implements OnInit{
   
   }
 
-  /*
-  * récupère tous les personnages de l'api swapi
-  */
-  getSW(){
-    var request = new XMLHttpRequest()
-    var baseRequest = "https://swapi.dev/api/people/"
-    request.open("GET", baseRequest , true)
-
-    var tab2 = new Array()
-
-    request.send()
-
-    request.onload = function(){
-      var data2 = JSON.parse(this.response)
-      for(var i = 0; i < data2.results.length;i++){
-        var tmp = data2.results[i].name.toLowerCase()
-        tab2.push(tmp)
-      }
-    }
-    this.tab = tab2
-    var i = 0
-    console.log(this.tab)
-    return new Promise(resolve => console.log())
-  }
-  
-  /*
-   * Cherche un élément dans le tableau
-  */
-  myIndexOf(elem){
-    for(var i = 0; i < 10; i++){
-      if(this.tab[i].toString().localeCompare(elem) == 0){
-        return i +1
-      }
-    }
-    return -1
-  }
 
   /*
-  Recherche pour les films
-  */
+   *Recherche pour les films Star Wars
+   */
   requete(texte, id, url, request){
     var result = texte;
 
@@ -99,30 +67,32 @@ export class AppComponent implements OnInit{
           result = result.concat(' ', data2.name)
         else if (id === "sw-film")
           result = result.concat(' ', data2.title)
-
         document.getElementById(id)!.innerHTML = result.toString()
     }
   }
 
   /*
-    Récupération des données pour affichage
-  */
+   *Récupération des données et affichage
+   */
   async getDonnees(){
 
     this.loadComponent()
 
     var p = (document.getElementById("site-search") as HTMLTextAreaElement).value;
 
+    //Mise en minuscule de la recherche car certaines API n'aiment pas la casse
     p = p.toLowerCase();
 
 
     var champChoix = document.getElementById("filterText")!;
     var selected = (champChoix as HTMLSelectElement).selectedIndex;
   
+    //Si pas d'univers séléctionné, on affiche une erreur
     if(selected == 0){
-      javascript:alert('Veuillez selectionner un univers !');
+      javascript:alert('Please choose a universe !');
     }
 
+    //Si univers Pokemon séléctionné
     if(selected == 1){
 
         var request = new XMLHttpRequest()
@@ -132,54 +102,107 @@ export class AppComponent implements OnInit{
         request.open("GET", baseRequest , true)
 
         request.onload = function(){
-            var data = JSON.parse(this.response)
-            document.getElementById("pokemon-nom")!.innerHTML = data.name.charAt(0).toUpperCase() + data.name.slice(1);
-            document.getElementById("pokemon-id")!.innerHTML = "ID : "  + data.id;
+
+            //On regarde si le personnage est bien connu dans la base de données
             try{
-              document.getElementById("pokemon-type")!.innerHTML = "Type : "  + data.types[0].type.name.charAt(0).toUpperCase() + data.types[0].type.name.slice(1) + ", " + data.types[1].type.name.charAt(0).toUpperCase() + data.types[1].type.name.slice(1);
+              var data = JSON.parse(this.response)
+
+              document.getElementById("pokemon-nom")!.innerHTML = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+              document.getElementById("pokemon-id")!.innerHTML = "ID : "  + data.id;
+
+              //Si le pokemon à deux types différents on les affiche
+              try{
+                document.getElementById("pokemon-type")!.innerHTML = "Type : "  + data.types[0].type.name.charAt(0).toUpperCase() + data.types[0].type.name.slice(1) + ", " + data.types[1].type.name.charAt(0).toUpperCase() + data.types[1].type.name.slice(1);
+              }
+
+              //Si le pokemon n'a qu'un seul type, on l'affiche
+              catch(error){
+                document.getElementById("pokemon-type")!.innerHTML = "Type : "  + data.types[0].type.name.charAt(0).toUpperCase() + data.types[0].type.name.slice(1);
+              }
+
+              document.getElementById("pokemon-generation")!.innerHTML = "Weight : "  + data.weight;
+              document.getElementById("pokemon-evol")!.innerHTML = "Height : "  + data.height;
+              document.getElementById("pokemon-image")!.innerHTML = "<img src="  + data.sprites.front_default+" style=\"width:200%;height:200%\">";
+
+              //On remet les éléments visibles (si jamais ils ont été cachés par une mauvaise recherche)
+              document.getElementById("pokemon-id")!.style.display = "block";
+              document.getElementById("pokemon-type")!.style.display = "block";
+              document.getElementById("pokemon-generation")!.style.display = "block";
+              document.getElementById("pokemon-evol")!.style.display = "block";
+              document.getElementById("pokemon-image")!.style.display = "block";
             }
+
+            //Si personnage pas connu, on affiche une erreur
             catch(error){
-              document.getElementById("pokemon-type")!.innerHTML = "Type : "  + data.types[0].type.name.charAt(0).toUpperCase() + data.types[0].type.name.slice(1);
+              document.getElementById("pokemon-nom")!.innerHTML = "Unknown character"
+              document.getElementById("pokemon-id")!.style.display = "none";
+              document.getElementById("pokemon-type")!.style.display = "none";
+              document.getElementById("pokemon-generation")!.style.display = "none";
+              document.getElementById("pokemon-evol")!.style.display = "none";
+              document.getElementById("pokemon-image")!.style.display = "none";
             }
-            document.getElementById("pokemon-generation")!.innerHTML = "Poids : "  + data.weight;
-            document.getElementById("pokemon-evol")!.innerHTML = "Taille : "  + data.height;
-            document.getElementById("pokemon-image")!.innerHTML = "<img src="  + data.sprites.front_default+" style=\"width:200%;height:200%\">";
         }
         request.send()
     }
+
+    //Si univers Star Wars séléctionné
     else if(selected == 2){
-        await this.getSW()
-        var index = this.myIndexOf(p)
         var request = new XMLHttpRequest()
-        var baseRequest = "https://swapi.dev/api/people/"
-        baseRequest = baseRequest.concat('', index.toString().concat('', '/')) 
+        var baseRequest = "https://swapi.dev/api/people/?search="
+        baseRequest = baseRequest.concat('',p) 
 
         var funfun = this.requete
 
         request.open("GET", baseRequest , true)
 
         request.onload = function(){
+
+          //On regarde si le personnage est bien connu dans la base de données
+          try{
             var data = JSON.parse(this.response)
 
-            document.getElementById("sw-nom")!.innerHTML = data.name;
-            document.getElementById("sw-sexe")!.innerHTML = "Sexe : "  + data.gender.charAt(0).toUpperCase() + data.gender.slice(1);
-            document.getElementById("sw-planete")!.innerHTML = "Planète : "  + data.homeworld;
-            
-            funfun("Première apparition :<br>", "sw-film", data.films[0].replace('http', 'https'), request)
-            funfun("Planète :", "sw-planete", data.homeworld, request)
-            funfun("Vaisseau :", "sw-vaisseau", data.starships[0], request)
-            if(data.species.length == 0)
-              document.getElementById("sw-espece")!.innerHTML = "Espèce : Human";
+            document.getElementById("sw-nom")!.innerHTML = data.results[0].name;
+            document.getElementById("sw-sexe")!.innerHTML = "Gender : "  + data.results[0].gender.charAt(0).toUpperCase() + data.results[0].gender.slice(1);
+            document.getElementById("sw-planete")!.innerHTML = "Homeworld : "  + data.results[0].homeworld;
+              
+            funfun("First appearance :<br>", "sw-film", data.results[0].films[0].replace('http', 'https'), request)
+            funfun("Homeworld :", "sw-planete", data.results[0].homeworld, request)
+            funfun("Starship :", "sw-vaisseau", data.results[0].starships[0], request)
+
+            //On verifie si le personnage est un humain pour l'afficher, car l'api ne le fait pas seul
+            if(data.results[0].species.length == 0)
+              document.getElementById("sw-espece")!.innerHTML = "Species : Human";
             else
-            funfun("Espèce :", "sw-espece", data.species[0], request)
+              funfun("Species :", "sw-espece", data.results[0].species[0], request)
+
+            //On remet les éléments visibles (si jamais ils ont été cachés par une mauvaise recherche)
+            document.getElementById("sw-sexe")!.style.display = "block";
+            document.getElementById("sw-planete")!.style.display = "block";
+            document.getElementById("sw-vaisseau")!.style.display = "block";
+            document.getElementById("sw-film")!.style.display = "block";
+            document.getElementById("sw-espece")!.style.display = "block";
+          }
+
+          //Si personnage pas connu, on affiche une erreur
+          catch(error){
+            document.getElementById("sw-nom")!.innerHTML = "Unknown character"
+            document.getElementById("sw-sexe")!.style.display = "none";
+            document.getElementById("sw-planete")!.style.display = "none";
+            document.getElementById("sw-vaisseau")!.style.display = "none";
+            document.getElementById("sw-film")!.style.display = "none";
+            document.getElementById("sw-espece")!.style.display = "none";
+          }
         }
         request.send()
     }
+
+    //Si univers Marvel séléctionné
     else if(selected ==3){
         var ts = new Date().getTime();
         var hash = MD5(ts+'9ac7d74cb3352c72413580e0f9e479a2146684cb'+'10b22b8b4415964669f4c2765f3a78c2').toString();
         var url = 'http://gateway.marvel.com/v1/public/characters'
   
+        //Envoi de la clé d'API
         $.getJSON(url, {
           apikey: '10b22b8b4415964669f4c2765f3a78c2',
           ts: ts,
@@ -187,16 +210,37 @@ export class AppComponent implements OnInit{
           name: p
           })
           .done(function(data) {
-            var results = data.data.results;
+
+            //On regarde si le personnage est bien connu dans la base de données
+            try{
+              var results = data.data.results;
               document.getElementById("marvel-nom")!.innerHTML = results[0].name;
               document.getElementById("marvel-description")!.innerHTML = results[0].description;
-              document.getElementById("marvel-stories")!.innerHTML = "Films : "  + results[0].events.items[results[0].events.returned];
-              document.getElementById("marvel-series")!.innerHTML = "Série : "  + results[0].series.items[results[0].series.returned];
+              document.getElementById("marvel-series")!.innerHTML = "Comics: "  + results[0].series.items[0].name;
+              document.getElementById("marvel-stories")!.innerHTML = "Story Comics: "  + results[0].stories.items[0].name;
               document.getElementById("marvel-image")!.innerHTML = "<img src="  + results[0].thumbnail.path+'/landscape_medium.jpg ' + "style=\"width:200%;height:200%\">";
-              
+
+                
+              //Certain personnages n'ont pas de description. Ajout d'une description générique afin de ne pas faire de conflit ou d'erreurs sur la page.
               if( document.getElementById("marvel-description")!.innerHTML == ""){
                 document.getElementById("marvel-description")!.innerHTML = "There is no description for this character. Perhaps you could do it yourself so the database of marvel could be more complete. But on our side, we cannot do anything because we are only simple students.";
               }
+
+              //On remet les éléments visibles (si jamais ils ont été cachés par une mauvaise recherche)
+              document.getElementById("marvel-description")!.style.display = "block";
+              document.getElementById("marvel-stories")!.style.display = "block";
+              document.getElementById("marvel-series")!.style.display = "block";
+              document.getElementById("marvel-image")!.style.display = "block";
+            }
+
+            //Si personnage pas connu, on affiche une erreur
+            catch(error){
+              document.getElementById("marvel-nom")!.innerHTML = "Unknown character"
+              document.getElementById("marvel-description")!.style.display = "none";
+              document.getElementById("marvel-stories")!.style.display = "none";
+              document.getElementById("marvel-series")!.style.display = "none";
+              document.getElementById("marvel-image")!.style.display = "none";
+            }
               
           })
           .fail(function(err){
@@ -204,6 +248,8 @@ export class AppComponent implements OnInit{
             console.log(err);
           });
     }
+
+    //On vide la barre de recherche afin que l'utilisateur n'ai pas à le faire lui même
     (document.getElementById("site-search") as HTMLTextAreaElement).value = "";
 
   }

@@ -19,7 +19,8 @@ html{
  * Classe pour l'ensemble du body de la page
 */
 .bodyClass{
-    background-color: rgb(75, 75, 75);
+    background-image: url("./assets/images/wallpaper.jpg"); 
+    background-size: auto;
     color :rgb(226, 21, 21);
 }
 
@@ -40,7 +41,7 @@ html{
  * Classe pour l'ensemble du body sauf le footer
 */
 .megaBody{
-    background-color: rgb(75, 75, 75);
+    background-image: "assets/images/wallpaper.jpg";
     color :#e21515;
 }
 

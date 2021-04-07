@@ -53,3 +53,24 @@
     padding-right: auto;
 }
 
+.zone_recherche{
+    position: relative;
+}
+
+.form-control{
+    position: absolute;
+    z-index: 100;
+}
+
+.search{
+    position: relative;
+    margin-top: 18.5%;
+}
+.sear-butt{
+    position: relative;
+    margin-top: 18.5%;
+}
+
+.megaBody{
+    background-image: "../assets/images/wallpaper.jpg";
+}

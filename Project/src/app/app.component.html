@@ -4,27 +4,29 @@
 
 
 	<div class="megaBody">
-		<!-- Navigation -->
+		<!-- Barre du haut avec logo -->
 		<nav class="header">
 			<div class="container">
-				<!--<a class="header-text" href="#">Chara-verse</a> <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarResponsive" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>-->
-				<!--<p id='logo'></p>-->
-				<img class="logo" src="assets/images/logo.png" alt="Chara-Verse">
+				<img class="logo" src="assets/images/logo.png" alt="Chara-Verse" onclick="window.location.reload()">
 			</div>
-		</nav><!-- Page Content -->
+		</nav>
+		
+		<!-- Contenu de la page -->
 		<div class="container">
 
+			<!-- Texte du site -->
 			<div>
-				<p class="text_recherche" id="text_recherche">Veuillez entrer un élément à rechercher</p>
-				<div class="list-group"></div> 
+				<p class="text_recherche" id="text_recherche">Please enter a character's name</p>
 			</div>
 
+			<!-- Zone contenant les elements relatifs a la recherche -->
 			<div class="row">
-				
 				<div class="zone_recherche">
+
+					<!-- Zone de selection de l'univers -->
 					<select class='form-control' id='filterText' onblur="this.size = 1" onchange='this.size = 0' onmousedown='if (this.options.length) 4;{this.size = 4}' size='1'>
 						<option selected>
-							Choisissez un univers
+							Choose an universe
 						</option>
 						<option>
 							Pokemon
@@ -35,27 +37,29 @@
 						<option>
 							Marvel
 						</option>
-					</select> <input aria-label="Search through site content" id="site-search" name="q" type="rechercher" class="search" onkeypress = "if (event.keyCode == 13)
-					document.getElementById('button').click()" autofocus="autofocus">  <button id='button' (click)="getDonnees()" class ="sear-butt">Search</button>
-				
+					</select> 
 
-				
-				
-				</div><!-- /.col-lg-3 -->
-
-				<!-- /.col-lg-9 -->
+					<!-- Zone de saisie de texte -->
+					<input aria-label="Search through site content" id="site-search" name="q" type="rechercher" class="search" onkeypress = "if (event.keyCode == 13)
+					document.getElementById('button').click()" autofocus="autofocus">
+					
+					<!-- Bouton de recherche -->
+					<button id='button' (click)="getDonnees()" class ="sear-butt">Search</button>
+				</div>
 			</div>
 
+			<!-- Zone non visible par défaut contenant les différents composants à faire apparaitre en fonction de l'univers -->
 			<div class ="cards">
 				<div class="card mt-4" id="composant" style="display: none;"><app-pokemon></app-pokemon></div>
 				<div class="card mt-4" id="composant2" style="display: none;"><app-star-wars></app-star-wars></div>
 				<div class="card mt-4" id="composant3" style="display: none;"><app-marvel></app-marvel></div>
 			</div>
-		</div><!-- /.container -->
-	</div><!-- Footer -->
+		</div>
+	</div>
+
+	<!-- Barre du bas avec copyright -->
 	<footer class="pied">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Chara-verse 2021</p><!--</div>-->
-			<!-- /.container -->
+			<p class="m-0 text-center text-white">Copyright &copy; Chara-verse 2021 - All the content belongs to their respective owners.</p>
 		</div>
-	</footer><!-- Bootstrap core JavaScript -->
+	</footer>

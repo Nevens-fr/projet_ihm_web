@@ -216,8 +216,9 @@ export class AppComponent implements OnInit{
               var results = data.data.results;
               document.getElementById("marvel-nom")!.innerHTML = results[0].name;
               document.getElementById("marvel-description")!.innerHTML = results[0].description;
-              document.getElementById("marvel-series")!.innerHTML = "Comics: "  + results[0].series.items[0].name;
-              document.getElementById("marvel-stories")!.innerHTML = "Story Comics: "  + results[0].stories.items[0].name;
+              document.getElementById("marvel-series")!.innerHTML = "Random Comic:<br> "  + results[0].comics.items[Math.floor(Math.random() * (results[0].comics.items.length))].name;
+
+              document.getElementById("marvel-stories")!.innerHTML = "Random Serie:<br>"  + results[0].series.items[Math.floor(Math.random() * (results[0].series.items.length))].name;
               document.getElementById("marvel-image")!.innerHTML = "<img src="  + results[0].thumbnail.path+'/landscape_medium.jpg ' + "style=\"width:200%;height:200%\">";
 
                 

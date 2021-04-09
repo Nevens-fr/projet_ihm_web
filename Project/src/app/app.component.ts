@@ -234,7 +234,7 @@ export class AppComponent implements OnInit{
               document.getElementById("marvel-image")!.style.display = "block";
             }
 
-            //Si personnage pas connu, on affiche une erreur
+            //Si personnage pas connu, on affiche une erreur 
             catch(error){
               document.getElementById("marvel-nom")!.innerHTML = "Unknown character"
               document.getElementById("marvel-description")!.style.display = "none";

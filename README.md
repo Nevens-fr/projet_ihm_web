@@ -4,7 +4,7 @@ Tudoret Aurelien, Malabry Thomas, Marin Timothée, Jourry Axel
 
 Commandes pour lancer le site web.
 
-Se mettre dans le dossier "Projet".
+Se mettre dans le dossier "Project".
 
 - ng update
 - npm update

@@ -1,4 +1,9 @@
-# projet_ihm_web
+# projet_ihm_web groupe 8
+
+Tudoret Aurelien
+Malabry Thomas
+Marin Timothée
+Jourry Axel
 
 Commandes pour lancer le site web.
 
